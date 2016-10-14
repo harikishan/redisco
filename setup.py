@@ -18,9 +18,6 @@ setup(name='redisco',
       download_url='',
       long_description=read('README.rst'),
       install_requires=read('requirements.txt').splitlines(),
-      extras_require = {
-        'redislite':  ["redislite>=1.0.228"]
-      },
       author='Tim Medina',
       author_email='iamteem@gmail.com',
       maintainer='Sebastien Requiem',
