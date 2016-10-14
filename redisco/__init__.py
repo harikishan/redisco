@@ -1,4 +1,8 @@
 # -*- coding: utf-8 -*-
+
+from django.conf import settings
+
+
 default_connection_settings = {}
 try:
     import redislite as redis
@@ -9,6 +13,21 @@ except ImportError:
         'port': 6379,
         'db': 0
     }
+
+class ConfigurationError(Exception):
+    """
+    Raised error if missing configurations
+    """
+
+
+try:
+    default_connection_settings = {
+        "host": settings.REDISCO_REDIS_HOST,
+        "port": settings.REDISCO_REDIS_PORT,
+        "db": settings.REDISCO_REDIS_DB
+    }
+except AttributeError as e:
+    raise ConfigurationError("Invalid configurations")
 
 
 class Client(object):
